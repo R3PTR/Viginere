@@ -32,8 +32,10 @@ public class Vigenere {
             } else {
                 decryptedCharacter += 91;
             }
-            if (keyIndex++ == key.length()) {
+            if (keyIndex + 1 == key.length()) {
                 keyIndex = 0;
+            } else {
+                keyIndex++;
             }
             sb.append((char) decryptedCharacter);
         }

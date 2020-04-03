@@ -1,6 +1,6 @@
 package me.R3PTR.Verschlüsselung;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 
 public class Main {
 
@@ -8,8 +8,15 @@ public class Main {
 
     //A = 65 Z = 90
     public static void main(String[] args) {
-        System.out.println(Vigenere.encrypt("Hallo", "Licht"));
-        System.out.println(Vigenere.decrypt("SINSH", "Licht"));
-        System.out.println(Decypher.getKeyLength(message));
+        int keyLength = Decypher.getKeyLength(message);
+        String dictionary = Decypher.dictionaryAttack(message, new File("4WordDictionarySorted.txt"));
+        System.out.println(dictionary);
+        String decryptedMessage = Vigenere.decrypt(message, dictionary);
+        System.out.println(decryptedMessage);
+
+        String bruteforce = Decypher.bruteforceAttack(message, keyLength);
+        System.out.println(bruteforce);
+        decryptedMessage = Vigenere.decrypt(message, bruteforce);
+        System.out.println(decryptedMessage);
     }
 }
