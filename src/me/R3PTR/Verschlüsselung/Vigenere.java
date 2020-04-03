@@ -1,6 +1,6 @@
 package me.R3PTR.Verschlüsselung;
 
-public class Viginere {
+public class Vigenere {
 
     public static String encrypt(String message, String key) {
         StringBuilder sb = new StringBuilder();
@@ -26,7 +26,16 @@ public class Viginere {
         key = key.toUpperCase().replace(" ", "");
         int keyIndex = 0;
         for (char c : message.toCharArray()) {
-
+            int decryptedCharacter = (int) c - (int) key.charAt(keyIndex);
+            if (decryptedCharacter >= 0) {
+                decryptedCharacter += 65;
+            } else {
+                decryptedCharacter += 91;
+            }
+            if (keyIndex++ == key.length()) {
+                keyIndex = 0;
+            }
+            sb.append((char) decryptedCharacter);
         }
         return sb.toString();
     }
